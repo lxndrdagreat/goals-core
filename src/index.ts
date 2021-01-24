@@ -19,11 +19,13 @@ export interface GoalUpsertData {
 
 export abstract class GoalStorageService {
 
-  abstract getGoalsWithOccurrence(occurrence: GoalOccurrence): Promise<GoalModel[]>;
-  abstract getGoalWithId(goalId: number): Promise<GoalModel>;
+  abstract getGoals(): Promise<GoalModel[]>;
+  abstract getGoalsByOccurrence(occurrence: GoalOccurrence): Promise<GoalModel[]>;
+  abstract getGoalById(goalId: number): Promise<GoalModel>;
   abstract upsertGoal(goalData: GoalUpsertData): Promise<GoalModel>;
   abstract deleteGoal(goalId: number): Promise<void>;
   abstract toggleGoalCompletion(goalId: number, completionDate: Date): Promise<boolean>;
-  abstract isGoalCompleted(goalId: number): Promise<[boolean, number]>;
+  abstract isGoalCompleted(goalId: number): Promise<[false, -1] | [true, number]>;
   abstract getGoalCompletions(goalId: number): Promise<CompletionModel[]>;
+  abstract getGoalsWithCompleted(): Promise<[GoalModel, boolean][]>;
 }
