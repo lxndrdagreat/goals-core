@@ -107,4 +107,4 @@ completed: `[GoalModel, boolean]`.
 
 ### Storage Projects
 
-- IndexedDB Storage
+- [IndexedDB Storage](https://github.com/lxndrdagreat/goals-storage-indexeddb)

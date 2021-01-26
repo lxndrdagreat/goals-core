@@ -17,15 +17,27 @@ export interface GoalUpsertData {
   occurs: number;
 }
 
+export type GoalCompletionScore = number;
+
 export abstract class GoalStorageService {
 
   abstract getGoals(): Promise<GoalModel[]>;
+
   abstract getGoalsByOccurrence(occurrence: GoalOccurrence): Promise<GoalModel[]>;
+
   abstract getGoalById(goalId: number): Promise<GoalModel>;
+
   abstract upsertGoal(goalData: GoalUpsertData): Promise<GoalModel>;
+
   abstract deleteGoal(goalId: number): Promise<void>;
+
   abstract toggleGoalCompletion(goalId: number, completionDate: Date): Promise<boolean>;
+
   abstract isGoalCompleted(goalId: number): Promise<[false, -1] | [true, number]>;
+
   abstract getGoalCompletions(goalId: number): Promise<CompletionModel[]>;
+
   abstract getGoalsWithCompleted(): Promise<[GoalModel, boolean][]>;
+
+  abstract getGoalCompletionScore(goal: GoalModel): Promise<GoalCompletionScore>;
 }

@@ -1,4 +1,3 @@
-
 export enum GoalOccurrence {
   Yearly,
   Monthly,
@@ -20,7 +19,8 @@ export class GoalModel {
     readonly occurs: GoalOccurrence,
     readonly dateAdded: Date,
     readonly id: number
-  ) {}
+  ) {
+  }
 
   static fromJSON(data: Record<string, string | number | Date>): GoalModel {
     if (!data.hasOwnProperty('title')) {
@@ -43,7 +43,7 @@ export class GoalModel {
     );
   }
 
-  copyWith(changes: {title?: string, occurs?: GoalOccurrence, dateAdded?: Date, id?: number}): GoalModel {
+  copyWith(changes: { title?: string, occurs?: GoalOccurrence, dateAdded?: Date, id?: number }): GoalModel {
     return new GoalModel(
       changes.title || this.title,
       changes.occurs || this.occurs,
@@ -112,7 +112,7 @@ export class GoalModel {
       return dayStart.getTime() <= date.getTime();
     } else if (this.occursWeekly) {
       const weekStart = new Date();
-      weekStart.setHours( 0);
+      weekStart.setHours(0);
       weekStart.setMinutes(0);
       weekStart.setSeconds(0);
       weekStart.setDate(weekStart.getDate() - weekStart.getDay());
