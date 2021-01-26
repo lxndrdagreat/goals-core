@@ -3,6 +3,7 @@ import {CompletionModel} from './completion-model';
 
 export * from './goal-model';
 export * from './completion-model';
+export * from './date-utils';
 
 export class GoalNotFoundError extends Error {
   constructor(message?: string) {
@@ -17,7 +18,11 @@ export interface GoalUpsertData {
   occurs: number;
 }
 
-export type GoalCompletionScore = number;
+export interface GoalCompletionScore {
+  rate: number;
+  completions: number;
+  possible: number;
+}
 
 export abstract class GoalStorageService {
 
