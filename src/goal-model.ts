@@ -1,3 +1,5 @@
+import {dateStart, isSameDate, weekStart} from './date-utils';
+
 export enum GoalOccurrence {
   Yearly,
   Monthly,
@@ -102,21 +104,14 @@ export class GoalModel {
     return (this.occurs & GoalOccurrence.Saturdays) === GoalOccurrence.Saturdays;
   }
 
-  hasOccurred(date: Date): boolean {
+  hasOccurred(completionDate: Date): boolean {
     // TODO: handle other cases
     if (this.occursDaily) {
-      const dayStart = new Date();
-      dayStart.setHours(0);
-      dayStart.setMinutes(0);
-      dayStart.setSeconds(0);
-      return dayStart.getTime() <= date.getTime();
+      const today = dateStart(new Date());
+      return isSameDate(today, completionDate);
     } else if (this.occursWeekly) {
-      const weekStart = new Date();
-      weekStart.setHours(0);
-      weekStart.setMinutes(0);
-      weekStart.setSeconds(0);
-      weekStart.setDate(weekStart.getDate() - weekStart.getDay());
-      return weekStart.getTime() <= date.getTime();
+      const week = weekStart(new Date());
+      return week.getTime() <= completionDate.getTime();
     } else {
       return false;
     }

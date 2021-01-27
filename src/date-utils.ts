@@ -1,3 +1,7 @@
+export function isSameDate(a: Date, b: Date): boolean {
+  return a.getDate() === b.getDate() && a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear();
+}
+
 export function dateStart(date: Date): Date {
   const start = new Date(date);
   start.setHours(0);
